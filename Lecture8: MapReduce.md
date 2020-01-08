@@ -35,16 +35,64 @@
       - Parallelize Reduce
       - Implement Storage for Map input, Map output, Reduce input, and Reduce output
    - **Locality**
-    - Mapreduce attempts to schedule a map task on a machine that contains a replica of corresponding input data.
-    - GFS divides each file into 64 MB blocks, and stores several copies of each block (typically 3 copies) on different machines
+      - Mapreduce attempts to schedule a map task on a machine that contains a replica of corresponding input data.
+      - GFS divides each file into 64 MB blocks, and stores several copies of each block (typically 3 copies) on different machines
       - Master scheduling policy:
         - Asks GFS for locations of replicas of input file blocks
         - Map tasks typically split into 64MB (== GFS block size)
         - Map tasks scheduled so GFS input block replica are on same machine or same rack
     - An optional **Combiner** function that does partial merging maybe used with the reduce functions if **significant repetition in intermediate keys**
     - Users specify number of reduce tasks `R` default technique: hashing.
+    
+    
+### Hadoop
+- Open source software framework designed for storage and processing of large scale data on clusters 
+- Store in **HDFS** (Hadoop Distributed File System) and uses **MapReduce**.
 
+<a href="https://ibb.co/G2g04Rd"><img src="https://i.ibb.co/QNsf3MJ/image.png" alt="image" border="0" width = "45%" height = "45%"></a>  <a href="https://ibb.co/WHw8GdR"><img src="https://i.ibb.co/cyHfkps/image.png" alt="image" border="0" width = "45%" height = "45%"></a>
 
+- Default replication is **3-fold**.
 
+- **Hadoop 1 Limitations**: Lacks support for Paradigms, Scalability (Max Cluster Nodes: 5000, Max Tasks: 40000), Axailabiliy, Hard Partition.
+- **Schedulers**
+    - **Hadoop Capacity Scheduler**: Multiple queues, Each queue contains multiple jobs & guaranteed some cluster capacity
+    - **Hadoop Fair Scheduler**: all jobs get equal share of resources, As jobs arrive, each job given equal % of cluster
+    - **Yarn Scheduler on Hadoop 2.x**: Treats each server as a collection of containers (fixed CPU + fixed memory)
+      - Main components 
+        - Resource Manager (RM) : Scheduling (Cluster resources)
+        - Node Manager (NM) : server-specific functions (Each node resources)
+        - Application Master (AM) : Container negotiation with RM and NMs, Detecting task failures of that job.
+        - Extermely useful because it deals with data **IN ONE PLACE**.
+     - To estimate time length: Calculate running time of task as proportional to size of its input.
+ - **Fault tolerance in Hadoop**:
+    - it comes with its cost!
+    - Reading/writing to disk is 100 x slower than in memory
+    - Network communication is 1000,000 x slower than in memory
+
+### Spark
+- Inherited from functional programming: **keep data in-memory and immutable**
+- if task is done by two workers, only one takes effect, When a  Reduce task completes, (atomically) rename file to final.
+- Fault tolerance is maintained by
+    - keeping the **lineage** of transformations
+    - when failures happen, **replay functions transformations** over original datasets
+- Spark is **100x** faster than Hadoop
+- **Fault tolerance in Spark**:
+  - Server Failure
+    1. NM heartbeats to RM
+      - If server fails: RM times out & lets all affected AMs take appropriate action
+    2. NM keeps track of each task running at its server
+      - If task fails while in-progress, mark the task as idle and restart it
+    3. AM heartbeats to RM
+        On failure, RM restarts AM, which then syncs it up with its running tasks
+  - RM Failure
+    - Use old checkpoints and bring up secondary RM.
+  - Worker failure:
+    - Detect failure via periodic heartbeats
+    - Re-execute both completed and in-progress map tasks
+    - Re-execute only in progress reduce tasks
+  - Master failure:
+    - Could handle, but (master failure unlikely)
+  - Stragglers (Slow Tasks):
+    - Near end of phase, spawn backup copies of tasks & Whichever one finishes first, wins. Approach name's (Speculative Execution)
 
 

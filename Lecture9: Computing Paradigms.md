@@ -25,7 +25,7 @@
   - **RMI (Remote Method Invocation)**
     - Resembles remote procedure calls but in a world of distributed **objects**
 
-### Direct communication (Decoupled)
+### Indirect communication (Decoupled)
 - **Indirect Communication** (strong degree of *decoupling* between senders and receivers in time & space)
   * Space decoupling: Senders do not need to know who they are sending to
   * Time decoupling: Senders and receivers do not need to exist at the same time

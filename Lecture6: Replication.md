@@ -1,4 +1,4 @@
-## Relpication
+## Replication
 - Replication is Maintenance of copies at multiple sites 
 - Advantages of replications
   - Performance Enhancement

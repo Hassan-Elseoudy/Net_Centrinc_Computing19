@@ -18,6 +18,8 @@
 - **Transparency**: To hide the fact that machines are physically distributed and how much the distributed system appears as single system
 
 <a href="https://ibb.co/TP1bFsz"><img src="https://i.ibb.co/DwY8SZ3/image.png" alt="image" border="0"></a>
+  - **Note**: Replication transparency is the term used to describe the fact that the user should be unaware that data is replicated
+
 - **Scalability**: System scalability to size means easily add more users & resources.
   - Problems
     - Machines make decisions based only on local information.

@@ -41,8 +41,8 @@
         - Asks GFS for locations of replicas of input file blocks
         - Map tasks typically split into 64MB (== GFS block size)
         - Map tasks scheduled so GFS input block replica are on same machine or same rack
-    - An optional **Combiner** function that does partial merging maybe used with the reduce functions if **significant repetition in intermediate keys**
-    - Users specify number of reduce tasks `R` default technique: hashing.
+      - An optional **Combiner** function that does partial merging maybe used with the reduce functions if **significant repetition in intermediate keys**
+      - Users specify number of reduce tasks `R` default technique: hashing.
     
     
 ### Hadoop

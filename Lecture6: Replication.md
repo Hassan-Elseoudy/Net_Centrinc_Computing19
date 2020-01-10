@@ -9,8 +9,7 @@
     - time for which a service is accessible with reasonable response times
     - Probability of all server being available =  `p^n` `p` = prob of available.
     - Probability of all server being NOT available =  `(1 - p)^n` `p` = prob of available, `n` = number of servers.
-    - Probability of at least one server being available `(1 – p^n) `p` = prob of available, `n` = number of servers`
-    - the availability of an object replicated on all servers is `(1 – p)^n`
+    - Probability of at least one server being available `(1 – p^n)` `p` = prob of available, `n` = number of servers`
     - **Note**: caching does not count as a method of increasing availability
   - Fault Tolerance
     - Stronger than availability

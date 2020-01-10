@@ -7,7 +7,7 @@
     - Caching of data (e.g., proxy servers, DNS)
   - Increased Availability
     - time for which a service is accessible with reasonable response times
-    - the availability of an object replicated on all servers is `(1 – p^n)`
+    - the availability of an object replicated on all servers is `(1 – p)^n`
     - **Note**: caching does not count as a method of increasing availability
   - Fault Tolerance
     - Stronger than availability
